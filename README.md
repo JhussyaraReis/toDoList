@@ -120,3 +120,14 @@ ITEM DA LISTA
             </button>
           </div>
         </li>
+
+---
+
+Ao adicionar uma tarefa:
+
+criar um elemento <li>
+limpar o input
+
+Ao finalizar uma tarefa :
+incluir classe (iconFinished) na div.iconList e o "✔" dentro da div
+incluir classe (itemTaskFinished) no span.itemTaskFinished
