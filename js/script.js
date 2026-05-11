@@ -14,8 +14,17 @@ function config() {
           tag: "div",
           classList: "itemTask",
           children: [
-            { tag: "div", classList: "iconList" },
-            { tag: "span", textContent: inputTask.value },
+            {
+              tag: "div",
+              classList: "iconList",
+              id: `iconList-${counterTask}`,
+              clickEvent: true,
+            },
+            {
+              tag: "span",
+              id: `spanText-${counterTask}`,
+              textContent: inputTask.value,
+            },
           ],
         },
         {
@@ -25,6 +34,7 @@ function config() {
             {
               tag: "button",
               id: `btnEdit-${counterTask}`,
+              clickEvent: true,
               html: `<svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -47,6 +57,7 @@ function config() {
             {
               tag: "button",
               id: `btnDel-${counterTask}`,
+              clickEvent: true,
               html: `<svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -73,23 +84,34 @@ function config() {
   ];
 }
 
-function editTask(id) {
-  console.log("editTask");
+// function editTask(id) {
+//   const spanText = document.getElementById(`spanText-${id}`);
+//   inputTask.value = spanText.textContent;
+//   //   spanText.textContent = inputTask.value;
+//   console.log("editTask");
+// }
+
+function finishTask(id) {
+  const task = document.getElementById(`iconList-${id}`);
+  task.classList.toggle("iconFinished");
+  const spanText = document.getElementById(`spanText-${id}`);
+  spanText.classList.toggle("itemTaskFinished");
 }
 
 function delTask(id) {
-  const taskId = id.split("-")[1];
-  const task = document.getElementById(`task-${taskId}`);
+  const task = document.getElementById(`task-${id}`);
   task.remove();
-  console.log(task);
 }
 
 function creatbtns(btn, id) {
   btn.addEventListener("click", (e) => {
-    if (id === "btnEdit") {
-      editTask(id);
-    } else {
-      delTask(id);
+    const btnId = id.split("-");
+    if (btnId[0] === "btnEdit") {
+      editTask(btnId[1]);
+    } else if (btnId[0] === "btnDel") {
+      delTask(btnId[1]);
+    } else if (btnId[0] === "iconList") {
+      finishTask(btnId[1]);
     }
   });
 }
@@ -107,8 +129,10 @@ function createtask(config, pai) {
       element.textContent = objElement.textContent;
     }
     if (objElement.html) {
+      element.innerHTML = objElement.html;
+    }
+    if (objElement.clickEvent) {
       creatbtns(element, objElement.id);
-      element.innerHTML += objElement.html;
     }
     pai.appendChild(element);
     if (objElement.children) {
@@ -117,13 +141,10 @@ function createtask(config, pai) {
   });
 }
 
-function render() {
-  // renderizar a tela, botão addTask ativa apenas quando tiver algo digitado  no input
-}
-
 btnAddTask.addEventListener("click", () => {
-  createtask(config(), ul);
-  counterTask++;
+  if (inputTask.value.trim() !== "") {
+    createtask(config(), ul);
+    inputTask.value = "";
+    counterTask++;
+  }
 });
-
-render();
