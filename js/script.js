@@ -18,7 +18,10 @@ function config() {
               tag: "div",
               classList: "iconList",
               id: `iconList-${counterTask}`,
-              clickEvent: true,
+              dataset: {
+                action: "finished",
+                id: counterTask,
+              },
             },
             {
               tag: "span",
@@ -34,7 +37,10 @@ function config() {
             {
               tag: "button",
               id: `btnEdit-${counterTask}`,
-              clickEvent: true,
+              dataset: {
+                action: "edit",
+                id: counterTask,
+              },
               html: `<svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -57,7 +63,10 @@ function config() {
             {
               tag: "button",
               id: `btnDel-${counterTask}`,
-              clickEvent: true,
+              dataset: {
+                action: "delete",
+                id: counterTask,
+              },
               html: `<svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -92,7 +101,7 @@ function config() {
 // }
 
 function finishTask(id) {
-  const task = document.getElementById(`iconList-${id}`);
+  const task = document.querySelector(`[data-id = "${id}" ]`);
   task.classList.toggle("iconFinished");
   const spanText = document.getElementById(`spanText-${id}`);
   spanText.classList.toggle("itemTaskFinished");
@@ -101,19 +110,6 @@ function finishTask(id) {
 function delTask(id) {
   const task = document.getElementById(`task-${id}`);
   task.remove();
-}
-
-function creatbtns(btn, id) {
-  btn.addEventListener("click", (e) => {
-    const btnId = id.split("-");
-    if (btnId[0] === "btnEdit") {
-      editTask(btnId[1]);
-    } else if (btnId[0] === "btnDel") {
-      delTask(btnId[1]);
-    } else if (btnId[0] === "iconList") {
-      finishTask(btnId[1]);
-    }
-  });
 }
 
 function createtask(config, pai) {
@@ -128,12 +124,15 @@ function createtask(config, pai) {
     if (objElement.textContent) {
       element.textContent = objElement.textContent;
     }
+    if (objElement.dataset) {
+      for (const key in objElement.dataset) {
+        element.dataset[key] = objElement.dataset[key];
+      }
+    }
     if (objElement.html) {
       element.innerHTML = objElement.html;
     }
-    if (objElement.clickEvent) {
-      creatbtns(element, objElement.id);
-    }
+
     pai.appendChild(element);
     if (objElement.children) {
       createtask(objElement.children, element);
@@ -146,5 +145,17 @@ btnAddTask.addEventListener("click", () => {
     createtask(config(), ul);
     inputTask.value = "";
     counterTask++;
+  }
+});
+
+ul.addEventListener("click", (event) => {
+  if (event.target.closest("button")) {
+    let btn = event.target.closest("button");
+    if (btn.dataset.action === "delete") delTask(btn.dataset.id);
+    else if (btn.dataset.action === "edit") editTask(btn.dataset.id);
+  } else {
+    if (event.target.closest("div")) {
+      finishTask(event.target.closest("div").dataset.id);
+    }
   }
 });
