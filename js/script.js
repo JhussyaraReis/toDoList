@@ -1,6 +1,7 @@
 const btnAddTask = document.getElementById("btnAddTask");
 const inputTask = document.getElementById("inputTask");
 const ul = document.getElementById("listContainer");
+// const arrayTask = document.
 let counterTask = 1;
 
 function config() {
@@ -149,13 +150,21 @@ btnAddTask.addEventListener("click", () => {
 });
 
 ul.addEventListener("click", (event) => {
-  if (event.target.closest("button")) {
-    let btn = event.target.closest("button");
-    if (btn.dataset.action === "delete") delTask(btn.dataset.id);
-    else if (btn.dataset.action === "edit") editTask(btn.dataset.id);
-  } else {
-    if (event.target.closest("div")) {
-      finishTask(event.target.closest("div").dataset.id);
-    }
+  const target = event.target.closest("[data-action]");
+
+  if (!target) return;
+
+  const action = target.dataset.action;
+  const id = target.dataset.id;
+
+  if (action === "delete") {
+    delTask(id);
+  }
+  if (action === "edit") {
+    editTask(id);
+  }
+
+  if (action === "finished") {
+    finishTask(id);
   }
 });
