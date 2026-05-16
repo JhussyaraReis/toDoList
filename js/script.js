@@ -1,15 +1,14 @@
 const btnAddTask = document.getElementById("btnAddTask");
 const inputTask = document.getElementById("inputTask");
 const ul = document.getElementById("listContainer");
-// const arrayTask = document.
+const arrayTasks = [];
 let counterTask = 1;
 
-function config() {
+function config(task) {
   return [
     {
       tag: "li",
       classList: "listItem",
-      id: `task-${counterTask}`,
       children: [
         {
           tag: "div",
@@ -18,16 +17,15 @@ function config() {
             {
               tag: "div",
               classList: "iconList",
-              id: `iconList-${counterTask}`,
+
               dataset: {
                 action: "finished",
-                id: counterTask,
+                id: task.id,
               },
             },
             {
               tag: "span",
-              id: `spanText-${counterTask}`,
-              textContent: inputTask.value,
+              textContent: task.text,
             },
           ],
         },
@@ -37,10 +35,9 @@ function config() {
           children: [
             {
               tag: "button",
-              id: `btnEdit-${counterTask}`,
               dataset: {
                 action: "edit",
-                id: counterTask,
+                id: task.id,
               },
               html: `<svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -63,10 +60,9 @@ function config() {
             },
             {
               tag: "button",
-              id: `btnDel-${counterTask}`,
               dataset: {
                 action: "delete",
-                id: counterTask,
+                id: task.id,
               },
               html: `<svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -109,8 +105,10 @@ function finishTask(id) {
 }
 
 function delTask(id) {
-  const task = document.getElementById(`task-${id}`);
-  task.remove();
+  const taskDel = arrayTasks.find((task) => task.id === id);
+  const indiceTaskDel = arrayTasks.indexOf(taskDel);
+  arrayTasks.splice(indiceTaskDel, 1);
+  render();
 }
 
 function createtask(config, pai) {
@@ -141,9 +139,27 @@ function createtask(config, pai) {
   });
 }
 
+function addTask(text) {
+  arrayTasks.push({
+    id: crypto.randomUUID(),
+    text: text,
+    completed: false,
+  });
+  render();
+}
+
+function render() {
+  ul.innerHTML = "";
+  arrayTasks.forEach((task) => {
+    const taskConfig = config(task);
+    createtask(taskConfig, ul);
+  });
+}
+
 btnAddTask.addEventListener("click", () => {
   if (inputTask.value.trim() !== "") {
-    createtask(config(), ul);
+    addTask(inputTask.value);
+    // createtask(config(), ul);
     inputTask.value = "";
     counterTask++;
   }
