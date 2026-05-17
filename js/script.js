@@ -8,6 +8,7 @@ function config(task) {
   return [
     {
       tag: "li",
+      completed: task.completed,
       classList: "listItem",
       children: [
         {
@@ -98,10 +99,9 @@ function config(task) {
 // }
 
 function finishTask(id) {
-  const task = document.querySelector(`[data-id = "${id}" ]`);
-  task.classList.toggle("iconFinished");
-  const spanText = document.getElementById(`spanText-${id}`);
-  spanText.classList.toggle("itemTaskFinished");
+  const taksFinished = arrayTasks.find((task) => task.id === id);
+  taksFinished.completed = taksFinished.completed ? false : true;
+  render();
 }
 
 function delTask(id) {
@@ -122,6 +122,9 @@ function createtask(config, pai) {
     }
     if (objElement.textContent) {
       element.textContent = objElement.textContent;
+    }
+    if (objElement.completed == true) {
+      element.classList.toggle("completed");
     }
     if (objElement.dataset) {
       for (const key in objElement.dataset) {
@@ -159,7 +162,6 @@ function render() {
 btnAddTask.addEventListener("click", () => {
   if (inputTask.value.trim() !== "") {
     addTask(inputTask.value);
-    // createtask(config(), ul);
     inputTask.value = "";
     counterTask++;
   }

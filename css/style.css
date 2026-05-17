@@ -126,20 +126,21 @@ body {
 
 /* Classe para estilizar icones/task conluídos */
 
-.iconFinished {
+.completed .iconList {
   background-color: var(--primary-color);
   border: 5px solid var(--primary-color);
 }
-.iconFinished::before {
+.completed .iconList::before {
   content: "✔";
 }
-
-.itemTaskFinished {
+.completed span {
   text-decoration: line-through;
   font-style: italic;
   color: var(--second-fontColor);
 }
+
 /***********************************************/
+
 .itemButtons {
   width: 20%;
   height: 100%;
