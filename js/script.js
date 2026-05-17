@@ -2,7 +2,10 @@ const btnAddTask = document.getElementById("btnAddTask");
 const inputTask = document.getElementById("inputTask");
 const ul = document.getElementById("listContainer");
 const counter = document.querySelector(".counter");
+const filterContainer = document.querySelector(".filterContainer");
 let arrayTasks = [];
+let arrayFilter = arrayTasks;
+let selectedFilter = "all";
 
 function config(task) {
   return [
@@ -170,11 +173,11 @@ function addTask(text) {
 
 function render() {
   ul.innerHTML = "";
-  arrayTasks.forEach((task) => {
+  arrayFilter.forEach((task) => {
     const taskConfig = config(task);
     createtask(taskConfig, ul);
   });
-  counter.textContent = arrayTasks.length;
+  counter.textContent = `${arrayFilter.length} / ${arrayTasks.length}`;
 }
 
 btnAddTask.addEventListener("click", () => {
@@ -209,4 +212,18 @@ ul.addEventListener("keydown", (event) => {
   if (event.target.dataset.action === "save") {
     saveTaskEdited(event.target.dataset.id, event.target.value);
   }
+});
+
+filterContainer.addEventListener("click", (event) => {
+  selectedFilter = event.target.dataset.filter;
+  if (selectedFilter === "all") {
+    arrayFilter = arrayTasks;
+  }
+  if (selectedFilter === "pending") {
+    arrayFilter = arrayTasks.filter((task) => !task.completed);
+  }
+  if (selectedFilter === "completed") {
+    arrayFilter = arrayTasks.filter((task) => task.completed);
+  }
+  render();
 });
