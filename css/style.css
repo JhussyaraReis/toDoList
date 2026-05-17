@@ -201,6 +201,9 @@ body {
   color: var(--font-color);
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  /* text-decoration: underline; colocar quando o botão estiver selecionado
-  font-weight: bold; */
+}
+
+.filterContainer button:hover {
+  text-decoration: underline;
+  font-weight: bold;
 }

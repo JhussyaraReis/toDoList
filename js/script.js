@@ -100,7 +100,9 @@ function config(task) {
 
 function saveTaskEdited(id, value) {
   const taskEdited = arrayTasks.find((task) => task.id == id);
-  taskEdited.text = value;
+  if (value.trim() !== "") {
+    taskEdited.text = value;
+  }
   taskEdited.editing = false;
   render();
 }
@@ -173,11 +175,27 @@ function addTask(text) {
 
 function render() {
   ul.innerHTML = "";
+
+  if (selectedFilter === "all") {
+    arrayFilter = arrayTasks;
+  }
+  if (selectedFilter === "pending") {
+    arrayFilter = arrayTasks.filter((task) => !task.completed);
+  }
+  if (selectedFilter === "completed") {
+    arrayFilter = arrayTasks.filter((task) => task.completed);
+  }
+
   arrayFilter.forEach((task) => {
     const taskConfig = config(task);
     createtask(taskConfig, ul);
   });
   counter.textContent = `${arrayFilter.length} / ${arrayTasks.length}`;
+
+  const input = document.querySelector(".inputEdit");
+  if (input) {
+    input.focus();
+  }
 }
 
 btnAddTask.addEventListener("click", () => {
@@ -216,14 +234,5 @@ ul.addEventListener("keydown", (event) => {
 
 filterContainer.addEventListener("click", (event) => {
   selectedFilter = event.target.dataset.filter;
-  if (selectedFilter === "all") {
-    arrayFilter = arrayTasks;
-  }
-  if (selectedFilter === "pending") {
-    arrayFilter = arrayTasks.filter((task) => !task.completed);
-  }
-  if (selectedFilter === "completed") {
-    arrayFilter = arrayTasks.filter((task) => task.completed);
-  }
   render();
 });
