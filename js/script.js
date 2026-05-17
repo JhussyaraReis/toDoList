@@ -1,14 +1,15 @@
 const btnAddTask = document.getElementById("btnAddTask");
 const inputTask = document.getElementById("inputTask");
 const ul = document.getElementById("listContainer");
-const arrayTasks = [];
-let counterTask = 1;
+const counter = document.querySelector(".counter");
+let arrayTasks = [];
 
 function config(task) {
   return [
     {
       tag: "li",
       completed: task.completed,
+      editing: task.editing,
       classList: "listItem",
       children: [
         {
@@ -18,15 +19,18 @@ function config(task) {
             {
               tag: "div",
               classList: "iconList",
-
               dataset: {
                 action: "finished",
                 id: task.id,
               },
             },
             {
-              tag: "span",
-              textContent: task.text,
+              tag: task.editing ? "input" : "span",
+              id: task.id,
+              classList: "inputEdit",
+              textContent: task.editing ? "" : task.text,
+              value: task.editing ? task.text : "",
+              dataset: task.editing ? { action: "save", id: task.id } : null,
             },
           ],
         },
@@ -91,16 +95,22 @@ function config(task) {
   ];
 }
 
-// function editTask(id) {
-//   const spanText = document.getElementById(`spanText-${id}`);
-//   inputTask.value = spanText.textContent;
-//   //   spanText.textContent = inputTask.value;
-//   console.log("editTask");
-// }
+function saveTaskEdited(id, value) {
+  const taskEdited = arrayTasks.find((task) => task.id == id);
+  taskEdited.text = value;
+  taskEdited.editing = false;
+  render();
+}
+
+function editTask(id) {
+  const takEdited = arrayTasks.find((task) => task.id == id);
+  takEdited.editing = !takEdited.editing;
+  render();
+}
 
 function finishTask(id) {
   const taksFinished = arrayTasks.find((task) => task.id === id);
-  taksFinished.completed = taksFinished.completed ? false : true;
+  taksFinished.completed = !taksFinished.completed; // novo toggle : mesma coisa taksFinished.completed = taksFinished.completed ? false : true;
   render();
 }
 
@@ -120,11 +130,17 @@ function createtask(config, pai) {
     if (objElement.id) {
       element.id = objElement.id;
     }
+    if (objElement.value) {
+      element.value = objElement.value;
+      element.type = "text";
+      element.placeholder = "Digite ....";
+    }
     if (objElement.textContent) {
       element.textContent = objElement.textContent;
     }
-    if (objElement.completed == true) {
-      element.classList.toggle("completed");
+
+    if (objElement.completed) {
+      element.classList.add("completed");
     }
     if (objElement.dataset) {
       for (const key in objElement.dataset) {
@@ -147,6 +163,7 @@ function addTask(text) {
     id: crypto.randomUUID(),
     text: text,
     completed: false,
+    editing: false,
   });
   render();
 }
@@ -157,13 +174,13 @@ function render() {
     const taskConfig = config(task);
     createtask(taskConfig, ul);
   });
+  counter.textContent = arrayTasks.length;
 }
 
 btnAddTask.addEventListener("click", () => {
   if (inputTask.value.trim() !== "") {
     addTask(inputTask.value);
     inputTask.value = "";
-    counterTask++;
   }
 });
 
@@ -184,5 +201,12 @@ ul.addEventListener("click", (event) => {
 
   if (action === "finished") {
     finishTask(id);
+  }
+});
+
+ul.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter") return;
+  if (event.target.dataset.action === "save") {
+    saveTaskEdited(event.target.dataset.id, event.target.value);
   }
 });
