@@ -98,32 +98,46 @@ function config(task) {
   ];
 }
 
+function saveTasksLocal() {
+  localStorage.setItem("tasks", JSON.stringify(arrayTasks));
+}
+
+function loadTasksLocal() {
+  const tasks = localStorage.getItem("tasks");
+  if (tasks) {
+    arrayTasks = JSON.parse(tasks);
+  }
+}
+
+function update() {
+  saveTasksLocal();
+  render();
+}
+
 function saveTaskEdited(id, value) {
   const taskEdited = arrayTasks.find((task) => task.id == id);
   if (value.trim() !== "") {
     taskEdited.text = value;
   }
   taskEdited.editing = false;
-  render();
+  update();
 }
 
 function editTask(id) {
   const takEdited = arrayTasks.find((task) => task.id == id);
   takEdited.editing = !takEdited.editing;
-  render();
+  update();
 }
 
 function finishTask(id) {
   const taksFinished = arrayTasks.find((task) => task.id === id);
   taksFinished.completed = !taksFinished.completed; // novo toggle : mesma coisa taksFinished.completed = taksFinished.completed ? false : true;
-  render();
+  update();
 }
 
 function delTask(id) {
-  const taskDel = arrayTasks.find((task) => task.id === id);
-  const indiceTaskDel = arrayTasks.indexOf(taskDel);
-  arrayTasks.splice(indiceTaskDel, 1);
-  render();
+  arrayTasks = arrayTasks.filter((task) => task.id !== id); // atualiza o arrayTask com todos as tasks menos a que tenha o id passado
+  update();
 }
 
 function createtask(config, pai) {
@@ -170,7 +184,7 @@ function addTask(text) {
     completed: false,
     editing: false,
   });
-  render();
+  update();
 }
 
 function render() {
@@ -236,3 +250,6 @@ filterContainer.addEventListener("click", (event) => {
   selectedFilter = event.target.dataset.filter;
   render();
 });
+
+loadTasksLocal();
+render();
