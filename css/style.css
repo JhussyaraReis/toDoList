@@ -203,7 +203,27 @@ body {
   cursor: pointer;
 }
 
+.selectedFilter {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .filterContainer button:hover {
   text-decoration: underline;
   font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .filterContainer {
+    width: 80%;
+  }
+
+  .itemButtons button {
+    display: none;
+  }
+  .itemButtons::before {
+    content: "⋮";
+    color: white;
+    font-size: 25px;
+  }
 }

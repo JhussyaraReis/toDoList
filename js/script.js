@@ -247,7 +247,15 @@ ul.addEventListener("keydown", (event) => {
 });
 
 filterContainer.addEventListener("click", (event) => {
+  const currentFilter = document.querySelector(".selectedFilter");
+  if (currentFilter) {
+    currentFilter.classList.remove("selectedFilter");
+  }
+
   selectedFilter = event.target.dataset.filter;
+
+  event.target.classList.add("selectedFilter");
+
   render();
 });
 
