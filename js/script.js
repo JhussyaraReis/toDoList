@@ -247,10 +247,10 @@ ul.addEventListener("keydown", (event) => {
 });
 
 filterContainer.addEventListener("click", (event) => {
-  const currentFilter = document.querySelector(".selectedFilter");
-  if (currentFilter) {
-    currentFilter.classList.remove("selectedFilter");
-  }
+  document.querySelector(".selectedFilter")?.classList.remove("selectedFilter");
+
+  event.target.classList.add("selectedFilter");
+
   selectedFilter = event.target.dataset.filter;
   event.target.classList.add("selectedFilter");
 
