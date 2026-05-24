@@ -251,9 +251,7 @@ filterContainer.addEventListener("click", (event) => {
   if (currentFilter) {
     currentFilter.classList.remove("selectedFilter");
   }
-
   selectedFilter = event.target.dataset.filter;
-
   event.target.classList.add("selectedFilter");
 
   render();
