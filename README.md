@@ -34,6 +34,7 @@ A aplicação permite criar, editar, concluir, remover e filtrar tarefas de form
 - 🎨 Interface moderna e responsiva
 - ⚡ Renderização dinâmica do DOM
 - 🧠 Estrutura baseada em configuração de componentes
+- 💾 Persistência de dados com LocalStorage
 
 ---
 
@@ -102,7 +103,6 @@ Durante o desenvolvimento deste projeto foram praticados conceitos importantes c
 
 ## 🔥 Próximas melhorias
 
-- 💾 Persistência de dados com LocalStorage
 - 📱 Melhor responsividade
 - 🖱️ Drag and Drop nas tarefas
 - 🌙 Dark/Light Mode
