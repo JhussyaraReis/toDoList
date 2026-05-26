@@ -103,7 +103,8 @@ Durante o desenvolvimento deste projeto foram praticados conceitos importantes c
 
 ## 🔥 Próximas melhorias
 
-- 📱 Melhor responsividade / Mobile version
+- 📱 Melhor responsividade (Mobile version)
+- 🖱️ dropdown button
 - 🖱️ Drag and Drop nas tarefas
 - 🌙 Dark/Light Mode
 - ⚛️ Versão em React
