@@ -22,6 +22,7 @@ function config(task) {
             {
               tag: "div",
               classList: "iconList",
+              title: "Concluir",
               dataset: {
                 action: "finished",
                 id: task.id,
@@ -31,6 +32,7 @@ function config(task) {
               tag: task.editing ? "input" : "span",
               id: task.id,
               classList: "inputEdit",
+              title: task.editing ? "Enter para salvar" : "",
               textContent: task.editing ? "" : task.text,
               value: task.editing ? task.text : "",
               dataset: task.editing ? { action: "save", id: task.id } : null,
@@ -43,6 +45,7 @@ function config(task) {
           children: [
             {
               tag: "button",
+              title: "Editar",
               dataset: {
                 action: "edit",
                 id: task.id,
@@ -68,6 +71,7 @@ function config(task) {
             },
             {
               tag: "button",
+              title: "Excluir",
               dataset: {
                 action: "delete",
                 id: task.id,
@@ -94,6 +98,7 @@ function config(task) {
             {
               tag: "button",
               classList: "dropdown",
+              title: "Opções",
               textContent: "⋮",
               dataset: {
                 action: "dropdown",
@@ -200,6 +205,9 @@ function createtask(config, pai) {
     }
     if (objElement.textContent) {
       element.textContent = objElement.textContent;
+    }
+    if (objElement.title) {
+      element.title = objElement.title;
     }
 
     if (objElement.completed) {
