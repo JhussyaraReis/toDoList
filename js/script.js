@@ -99,6 +99,33 @@ function config(task) {
                 action: "dropdown",
                 id: task.id,
               },
+              children: [
+                {
+                  tag: "ul",
+                  classList: "menuHidden",
+                  dataset: {
+                    id: task.id,
+                  },
+                  children: [
+                    {
+                      tag: "li",
+                      textContent: "Editar",
+                      dataset: {
+                        action: "edit",
+                        id: task.id,
+                      },
+                    },
+                    {
+                      tag: "li",
+                      textContent: "Deletar",
+                      dataset: {
+                        action: "delete",
+                        id: task.id,
+                      },
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -148,6 +175,13 @@ function finishTask(id) {
 function delTask(id) {
   arrayTasks = arrayTasks.filter((task) => task.id !== id); // atualiza o arrayTask com todos as tasks menos a que tenha o id passado
   update();
+}
+
+function openHiddenMenu(id) {
+  const hiddenMenu = document.querySelector(
+    `button.dropdown [data-id = "${id}"]`,
+  );
+  hiddenMenu.classList.toggle("showHiddenMenu");
 }
 
 function createtask(config, pai) {
@@ -246,6 +280,10 @@ ul.addEventListener("click", (event) => {
 
   if (action === "finished") {
     finishTask(id);
+  }
+
+  if (action === "dropdown") {
+    openHiddenMenu(id);
   }
 });
 
