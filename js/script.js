@@ -91,6 +91,15 @@ function config(task) {
                 <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
               </svg>`,
             },
+            {
+              tag: "button",
+              classList: "dropdown",
+              textContent: "⋮",
+              dataset: {
+                action: "dropdown",
+                id: task.id,
+              },
+            },
           ],
         },
       ],
@@ -103,6 +112,7 @@ function saveTasksLocal() {
 }
 
 function loadTasksLocal() {
+  inputTask.focus();
   const tasks = localStorage.getItem("tasks");
   if (tasks) {
     arrayTasks = JSON.parse(tasks);
