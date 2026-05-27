@@ -37,6 +37,7 @@ A aplicação permite criar, editar, concluir, remover e filtrar tarefas de form
 - 🧠 Estrutura baseada em configuração de componentes
 - 💾 Persistência de dados com LocalStorage
 - 📱 Versão para Mobile
+- 🖱️ drop-down button
 
 ---
 
@@ -105,7 +106,6 @@ Durante o desenvolvimento deste projeto foram praticados conceitos importantes c
 
 ## 🔥 Próximas melhorias
 
-- 🖱️ dropdown button
 - 🖱️ Drag and Drop nas tarefas
 - 🌙 Dark/Light Mode
 - ⚛️ Versão em React
