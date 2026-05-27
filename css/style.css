@@ -111,7 +111,7 @@ body {
   background-color: var(--background-color);
 }
 .itemTask {
-  width: 90%;
+  width: 80%;
   height: 100%;
   color: var(--font-color);
   display: flex;
@@ -120,6 +120,12 @@ body {
   font-size: clamp(5px, 5vw, 15px);
   font-family: "Poppins", sans-serif;
 }
+.itemTask span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .iconList {
   width: 22px;
   height: 16px;
@@ -169,7 +175,7 @@ body {
   width: 20%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
