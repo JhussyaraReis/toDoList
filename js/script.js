@@ -32,7 +32,7 @@ function config(task) {
               tag: task.editing ? "input" : "span",
               id: task.id,
               classList: "inputEdit",
-              title: task.editing ? "Enter para salvar" : "",
+              title: task.editing ? "Enter para salvar" : task.text,
               textContent: task.editing ? "" : task.text,
               value: task.editing ? task.text : "",
               dataset: task.editing ? { action: "save", id: task.id } : null,
