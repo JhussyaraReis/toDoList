@@ -15,6 +15,7 @@ Este projeto foi criado com o objetivo de praticar conceitos fundamentais do des
 - Recursividade
 - Organização de código
 - Componentização da interface
+- Responsividade
 
 A aplicação permite criar, editar, concluir, remover e filtrar tarefas de forma dinâmica.
 
@@ -35,6 +36,7 @@ A aplicação permite criar, editar, concluir, remover e filtrar tarefas de form
 - ⚡ Renderização dinâmica do DOM
 - 🧠 Estrutura baseada em configuração de componentes
 - 💾 Persistência de dados com LocalStorage
+- 📱 Versão para Mobile
 
 ---
 
@@ -103,7 +105,6 @@ Durante o desenvolvimento deste projeto foram praticados conceitos importantes c
 
 ## 🔥 Próximas melhorias
 
-- 📱 Melhor responsividade (Mobile version)
 - 🖱️ dropdown button
 - 🖱️ Drag and Drop nas tarefas
 - 🌙 Dark/Light Mode
