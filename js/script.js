@@ -13,15 +13,15 @@ function config(task) {
       tag: "li",
       completed: task.completed,
       editing: task.editing,
-      classList: "listItem",
+      classList: ["listItem"],
       children: [
         {
           tag: "div",
-          classList: "itemTask",
+          classList: ["itemTask"],
           children: [
             {
               tag: "div",
-              classList: "iconList",
+              classList: ["iconList"],
               title: "Concluir",
               dataset: {
                 action: "finished",
@@ -31,7 +31,7 @@ function config(task) {
             {
               tag: task.editing ? "input" : "span",
               id: task.id,
-              classList: "inputEdit",
+              classList: ["inputEdit"],
               title: task.editing ? "Enter para salvar" : task.text,
               textContent: task.editing ? "" : task.text,
               value: task.editing ? task.text : "",
@@ -41,7 +41,7 @@ function config(task) {
         },
         {
           tag: "div",
-          classList: "itemButtons",
+          classList: ["itemButtons"],
           children: [
             {
               tag: "button",
@@ -97,7 +97,7 @@ function config(task) {
             },
             {
               tag: "button",
-              classList: "dropdown",
+              classList: ["dropdown"],
               title: "Opções",
               textContent: "⋮",
               dataset: {
@@ -107,7 +107,7 @@ function config(task) {
               children: [
                 {
                   tag: "ul",
-                  classList: "menuHidden",
+                  classList: ["menuHidden", "hide"],
                   dataset: {
                     id: task.id,
                   },
@@ -193,7 +193,7 @@ function createtask(config, pai) {
   config.forEach((objElement) => {
     let element = document.createElement(objElement.tag);
     if (objElement.classList) {
-      element.classList.add(objElement.classList);
+      element.classList.add(...objElement.classList);
     }
     if (objElement.id) {
       element.id = objElement.id;

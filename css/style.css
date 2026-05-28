@@ -193,7 +193,7 @@ body {
   color: #9c05a9;
 }
 
-.menuHidden {
+.hide {
   display: none;
 }
 
@@ -207,10 +207,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .filterContainer {
-  width: 40%;
+  width: 50%;
   height: 80%;
   display: flex;
   justify-content: space-around;
@@ -229,7 +230,7 @@ body {
 }
 
 .filterContainer button {
-  width: calc(100% / 3 - 2%);
+  width: calc(100% / 3 - 5%);
   height: 50%;
   background-color: rgba(255, 255, 255, 0);
   border: none;
@@ -246,6 +247,37 @@ body {
 .filterContainer button:hover {
   text-decoration: underline;
   font-weight: bold;
+}
+
+.dropdownTheme {
+  height: 100%;
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--font-color);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.menuHidden {
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  list-style: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.563);
+  color: var(--font-color);
+  font-size: 0.8rem;
+  background-color: var(--input-color);
+  width: 25%;
+}
+.menuHidden li {
+  border: 1px solid rgba(45, 42, 42, 0.544);
+  width: 100%;
+  height: 2%;
+  padding: 5px;
+  text-align: start;
+  font-family: "Poppins", sans-serif;
 }
 
 /*********************............MOBILE VERSION........**************************/
@@ -270,28 +302,6 @@ body {
     display: block;
   }
 
-  .menuHidden {
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    list-style: none;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.563);
-    color: var(--font-color);
-    font-size: 0.8rem;
-    background-color: #c509d6;
-    width: 15%;
-  }
-  .menuHidden li {
-    border: 1px solid rgba(45, 42, 42, 0.544);
-    width: 100%;
-    height: 2%;
-    padding: 5px;
-    text-align: start;
-    font-family: "Poppins", sans-serif;
-  }
-  .menuHidden li:hover {
-    background-color: #dd53ea;
-  }
   .showHiddenMenu {
     display: flex;
   }
@@ -299,7 +309,7 @@ body {
     height: 10%;
   }
   .filterContainer {
-    width: 85%;
+    width: 90%;
   }
   .counter {
     width: 15%;
