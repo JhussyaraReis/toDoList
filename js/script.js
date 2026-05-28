@@ -3,6 +3,7 @@ const inputTask = document.getElementById("inputTask");
 const ul = document.getElementById("listContainer");
 const counter = document.querySelector(".counter");
 const filterContainer = document.querySelector(".filterContainer");
+const dropdownTheme = document.querySelector(".dropdownTheme");
 let arrayTasks = [];
 let arrayFilter = arrayTasks;
 let selectedFilter = "all";
@@ -186,7 +187,7 @@ function openHiddenMenu(id) {
   const hiddenMenu = document.querySelector(
     `button.dropdown [data-id = "${id}"]`,
   );
-  hiddenMenu.classList.toggle("showHiddenMenu");
+  hiddenMenu.classList.toggle("hide");
 }
 
 function createtask(config, pai) {
@@ -310,6 +311,11 @@ filterContainer.addEventListener("click", (event) => {
   selectedFilter = event.target.dataset.filter;
   event.target.classList.add("selectedFilter");
 
+  render();
+});
+
+dropdownTheme.addEventListener("click", (event) => {
+  event.target.querySelector(".menuHidden").classList.toggle("hide");
   render();
 });
 
