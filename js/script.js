@@ -319,5 +319,25 @@ dropdownTheme.addEventListener("click", (event) => {
   render();
 });
 
+const lista = document.getElementById("listContainer");
+Sortable.create(lista, {
+  animation: 150, // Suaviza o movimento (em milissegundos)
+  ghostClass: "itemFantasma", // Classe CSS para o item que está sendo arrastado
+  dragClass: "itemArrastado",
+  onEnd: function (evt) {
+    const antigoIndice = evt.oldIndex;
+    const novoIndice = evt.newIndex;
+
+    // Se o índice não mudou, não faz nada
+    if (antigoIndice === novoIndice) return;
+
+    // 1. Remove o item da posição antiga e guarda ele
+    const [itemMovido] = arrayTasks.splice(antigoIndice, 1);
+
+    // 2. Insere o item na nova posição
+    arrayTasks.splice(novoIndice, 0, itemMovido);
+  },
+});
+
 loadTasksLocal();
 render();
