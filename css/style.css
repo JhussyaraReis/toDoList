@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import url(./reset.css);
 @import url(./global.css);
@@ -54,12 +53,13 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .addTaskContainer input::placeholder {
-  color: var(--second-fontColor);
+  color: color-mix(in srgb, var(--font-color) 50%, transparent);
   font-size: 15px;
   font-family: "Poppins", sans-serif;
 }
 .addTaskContainer button svg {
   width: 100%;
+  color: var(--background-color);
 }
 
 .addTaskContainer button {
@@ -76,7 +76,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .addTaskContainer button:hover {
-  background-color: #d016e1;
+  background-color: color-mix(in srgb, var(--primary-color) 90%, transparent);
 }
 
 .listContainer {
@@ -137,11 +137,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--font-color);
+  color: var(--background-color);
   cursor: pointer;
 }
 .iconList:hover {
-  border-color: #9c05a9;
+  border-color: color-mix(in srgb, var(--primary-color) 70%, transparent);
   width: 23px;
   height: 18px;
 }
@@ -167,7 +167,7 @@ body {
 .completed span {
   text-decoration: line-through;
   font-style: italic;
-  color: var(--second-fontColor);
+  color: color-mix(in srgb, var(--font-color) 60%, transparent);
 }
 
 /***********************************************/
@@ -191,7 +191,7 @@ body {
 }
 
 .itemButtons button:hover {
-  color: #9c05a9;
+  color: color-mix(in srgb, var(--primary-color) 70%, transparent);
 }
 
 .dropdown {

@@ -2,8 +2,7 @@
   --background-color: #051956;
   --container-color: #3451a1be;
   --input-color: #92afffc1;
-  --primary-color: #ec06ff;
-  --secondary-color: #c509d6;
+  --primary-color: rgb(234, 6, 255);
+  --secondary-color: rgb(197, 9, 214);
   --font-color: #fafeff;
-  --second-fontColor: rgba(242, 247, 251, 0.559);
 }

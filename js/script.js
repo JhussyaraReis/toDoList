@@ -140,6 +140,27 @@ function config(task) {
   ];
 }
 
+function addThema(theme) {
+  document.documentElement.style.setProperty(
+    "--background-color",
+    theme.backgroundColor,
+  );
+  document.documentElement.style.setProperty(
+    "--container-color",
+    theme.containerColor,
+  );
+  document.documentElement.style.setProperty("--input-color", theme.inputColor);
+  document.documentElement.style.setProperty(
+    "--primary-color",
+    theme.primaryColor,
+  );
+  document.documentElement.style.setProperty(
+    "--secondary-color",
+    theme.secondaryColor,
+  );
+  document.documentElement.style.setProperty("--font-color", theme.fontColor);
+}
+
 function saveTasksLocal() {
   localStorage.setItem("tasks", JSON.stringify(arrayTasks));
 }
@@ -315,7 +336,54 @@ filterContainer.addEventListener("click", (event) => {
 });
 
 dropdownTheme.addEventListener("click", (event) => {
-  event.target.querySelector(".menuHidden").classList.toggle("hide");
+  event.target.querySelector(".menuHidden")?.classList.toggle("hide");
+  const theme = event.target.dataset.theme;
+  let colorTheme = {};
+  if (theme) {
+    if (theme === "blue") {
+      colorTheme = {
+        backgroundColor: "#051956",
+        containerColor: "#3451a1be",
+        inputColor: "#92afffc1",
+        primaryColor: "#ec06ff",
+        secondaryColor: "#c509d6",
+        fontColor: "#fafeff",
+      };
+    }
+
+    if (theme === "dark") {
+      colorTheme = {
+        backgroundColor: "#0f0f0f",
+        containerColor: "#1d1d1d",
+        inputColor: "#2c2c2c",
+        primaryColor: "#f4c430",
+        secondaryColor: "#d4a017",
+        fontColor: "#f5f5f5",
+      };
+    }
+    if (theme === "light") {
+      colorTheme = {
+        backgroundColor: "#e6ebe8",
+        containerColor: "#d0d8d4",
+        inputColor: "#bbc8c2",
+        primaryColor: "#1565c0",
+        secondaryColor: "#0d47a1",
+        fontColor: "#1f2d3a",
+      };
+    }
+    if (theme === "gold") {
+      colorTheme = {
+        backgroundColor: "#1a1204",
+        containerColor: "#3b2d0fcc",
+        inputColor: "#6e5421cc",
+        primaryColor: "#ffd700",
+        secondaryColor: "#c9a227",
+        fontColor: "#fff8e1",
+      };
+    }
+    addThema(colorTheme);
+  }
+
   render();
 });
 
