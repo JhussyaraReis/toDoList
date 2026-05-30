@@ -109,7 +109,6 @@ body {
   display: flex;
   justify-content: space-between;
   background-color: var(--background-color);
-  cursor: grab;
 }
 
 .itemTask {

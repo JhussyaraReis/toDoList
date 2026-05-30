@@ -106,7 +106,6 @@ Durante o desenvolvimento deste projeto foram praticados conceitos importantes c
 
 ## 🔥 Próximas melhorias
 
-- 🖱️ Drag and Drop nas tarefas
 - 🌙 Dark/Light Mode
 - ⚛️ Versão em React
 
