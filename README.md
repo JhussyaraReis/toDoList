@@ -38,6 +38,7 @@ A aplicação permite criar, editar, concluir, remover e filtrar tarefas de form
 - 💾 Persistência de dados com LocalStorage
 - 📱 Versão para Mobile
 - 🖱️ drop-down button
+- 🌙 Alterar tema (Dark/Light/Gold/Blue)
 
 ---
 
@@ -106,7 +107,6 @@ Durante o desenvolvimento deste projeto foram praticados conceitos importantes c
 
 ## 🔥 Próximas melhorias
 
-- 🌙 Dark/Light Mode
 - ⚛️ Versão em React
 
 ---
